@@ -1,0 +1,6 @@
+{
+    "DB":{
+        "username":"nadheruser",
+        "host":"@cluster0.7idrp.mongodb.net/whiteTestDB?retryWrites=true&w=majority"
+    }
+}

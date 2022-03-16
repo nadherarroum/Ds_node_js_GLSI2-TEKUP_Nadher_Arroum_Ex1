@@ -1,3 +1,4 @@
+require('./connectDB/connect');
 
 const express = require('express');
 const appDebug = require('debug')('app:debug');
