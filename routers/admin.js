@@ -36,7 +36,7 @@ router.get('/certif/:title', async(req, res)=>{
 });
 
 // Update certif 
-router.put('/certif/:title',async (req,res)=>{
+router.patch('/certif/:title',async (req,res)=>{
     // Find certif
     let title = req.params.title;
     let certif = await Certif.find({title : title});
@@ -50,11 +50,33 @@ router.put('/certif/:title',async (req,res)=>{
         return res.status(400).send(validation_res.error.details[0].message);
     }
     // Update certif
-    let cert = new Certif(req.body);
-    cert = await cert.save();
+    let cert = await Certif.updateOne(req.body);
+    //cert = await cert.save();
     // Return the updated certif
     res.send(cert);
     
+});
+
+// Delete Certif
+router.delete('/certif/delete/:id', async(req, res)=>{
+    const id = req.params.id;
+    let certif = await Certif.findById(id);
+
+    if(!certif)
+        return res.status(400).send('Certification ID not found !');
+
+    let deleteCert = Certif.remove({_id : id});
+    Promise.all([deleteCert]).then(result =>{
+        console.log(result);
+        res.status(200).json({
+            message : 'certif is deleted !'
+        });
+    }).catch(err => {
+        console.error(err);
+        res.status(500).json({
+            error: err
+        });
+    });
 });
 
 
