@@ -1,7 +1,7 @@
+
 const router    = require('express').Router();
 const bcrypt = require('bcryptjs');
-const { route } = require('express/lib/application');
-const req       = require('express/lib/request');
+const jwt = require('jsonwebtoken');
 const {Student, student_validation, login_validation} = require('../models/student');
 
 // SingUp - Register - New Student
@@ -50,7 +50,9 @@ router.post('/login',async (req, res)=>{
     if(!validPass)
         return res.status(400).send('Invalid password!');
     
-    res.send('Logged In !');
+    // Create and assign a token
+    const token = jwt.sign({_id: student._id}, process.env.TOKEN_SECRET);
+    res.header('auth-token',token).send(token);
 
 });
 
