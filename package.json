@@ -11,6 +11,7 @@
   "author": "nadher",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.7",
     "debug": "^4.3.3",
     "express": "^4.17.3",
