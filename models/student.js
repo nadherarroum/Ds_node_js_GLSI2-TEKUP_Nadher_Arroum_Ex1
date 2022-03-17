@@ -17,7 +17,13 @@ let student_validation = Joi.object({
     password : Joi.string().min(8).required()
 });
 
+let login_validation = Joi.object({
+    email : Joi.string().min(10).email().required(),
+    password : Joi.string().min(8).required()
+});
+
 let Student = mongoose.model('Student',student_schema);
 
 module.exports.Student=Student;
 module.exports.student_validation=student_validation;
+module.exports.login_validation=login_validation;
