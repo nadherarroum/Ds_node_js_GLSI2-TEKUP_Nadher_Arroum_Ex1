@@ -28,4 +28,11 @@ router.post('/certif/add',async (req,res)=>{
     res.send(certif);
 });
 
+// Search certif by title
+router.get('/certif/:title', async(req, res)=>{
+    let title = req.params.title;
+    let certif = await Certif.find({title : title});
+    res.send(certif);
+});
+
 module.exports=router;
